@@ -3,57 +3,27 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ProjectCard, Project } from "@/components/work/ProjectCard"
 import { cn } from "@/lib/utils"
-
-const projects: Project[] = [
-    {
-        id: "1",
-        title: "Hospitality OS",
-        category: "Management Systems",
-        description: "All-in-one ERP suite designed for luxury 5-star hotel chains to manage operations seamlessy.",
-        image: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80&w=1000&auto=format&fit=crop",
-        videoLoop: "", // Add if available or leave empty
-        demoUrl: "#",
-        walkthroughUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-    },
-    {
-        id: "2",
-        title: "CustomerGenie AI",
-        category: "AI Agents",
-        description: "Autonomous customer support agent capable of resolving 80% of queries without human intervention.",
-        image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?q=80&w=1000&auto=format&fit=crop",
-        demoUrl: "#",
-        walkthroughUrl: "#"
-    },
-    {
-        id: "3",
-        title: "FinFlow Mobile",
-        category: "Mobile Apps",
-        description: "Next-gen fintech application featuring biometric security and AI-powered spending insights.",
-        image: "https://images.unsplash.com/photo-1512428559087-560fa0db79b6?q=80&w=1000&auto=format&fit=crop",
-        demoUrl: "#",
-        walkthroughUrl: "#"
-    },
-    {
-        id: "4",
-        title: "ShopScale",
-        category: "E-commerce",
-        description: "High-performance headless e-commerce store with real-time inventory and AI personalization.",
-        image: "https://images.unsplash.com/photo-1523206489230-c012c64b2b48?q=80&w=1000&auto=format&fit=crop",
-        demoUrl: "#",
-        walkthroughUrl: "#"
-    }
-]
+// import { SpotlightCard } from "@/components/ui/SpotlightCard"; // Unused? Or used in ProjectCard
+import { useQuery } from "convex/react"
+import { api } from "@/convex/_generated/api"
 
 const filters = ["All", "AI Agents", "Management Systems", "Mobile Apps", "E-commerce"]
 
-import { SpotlightCard } from "@/components/ui/SpotlightCard";
-
-// ... (keep structure, wrap ProjectCard in SpotlightCard mechanism or update ProjectCard to use it)
-// Actually, ProjectCard has its own complex layout. It's better to update ProjectCard internally or wrap it.
-// Wrapping here is easier for now to maintain the grid layout.
-
 export function Work() {
     const [activeFilter, setActiveFilter] = useState("All")
+    const convexProjects = useQuery(api.projects.get)
+
+    // Map Convex data to Project interface
+    const projects: Project[] = convexProjects ? convexProjects.map((p: any) => ({
+        id: p._id,
+        title: p.title,
+        category: p.category,
+        description: p.description,
+        image: p.image,
+        videoLoop: p.videoLoop || "",
+        demoUrl: p.demoUrl || "#",
+        walkthroughUrl: p.walkthroughUrl || "#"
+    })) : []
 
     const filteredProjects = projects.filter(project =>
         activeFilter === "All" || project.category === activeFilter
@@ -103,6 +73,11 @@ export function Work() {
                             <ProjectCard key={project.id} project={project} />
                         ))}
                     </AnimatePresence>
+                    {filteredProjects.length === 0 && convexProjects && (
+                        <div className="col-span-full text-center text-neutral-500 py-10">
+                            No projects found in this category.
+                        </div>
+                    )}
                 </motion.div>
             </div>
         </section>

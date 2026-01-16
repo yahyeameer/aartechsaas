@@ -7,6 +7,7 @@ import { Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
+import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs"
 
 const navLinks = [
     { name: "Services", href: "#services" },
@@ -42,28 +43,44 @@ export function Navbar() {
                 </Link>
 
                 {/* Desktop Nav */}
-                <nav className="hidden md:flex items-center gap-8">
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.name}
-                            href={link.href}
-                            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                        >
-                            {link.name}
-                        </Link>
-                    ))}
-                </nav>
+                <div className="hidden md:flex items-center gap-8">
+                    <div className="flex gap-6">
+                        {navLinks.map((link) => (
+                            <Link
+                                key={link.name}
+                                href={link.href}
+                                className="text-sm font-medium text-white/70 hover:text-white transition-colors hover:glow-text"
+                            >
+                                {link.name}
+                            </Link>
+                        ))}
+                    </div>
 
-                {/* CTAs */}
-                <div className="hidden md:flex items-center gap-4">
-                    <Link href="#contact" className="text-sm font-medium text-white hover:text-primary transition-colors">
-                        Book a Demo
-                    </Link>
-                    <Button asChild className="rounded-full">
-                        <Link href="#contact">
-                            Get Started
-                        </Link>
-                    </Button>
+                    <div className="flex items-center gap-4">
+                        <SignedOut>
+                            <SignInButton mode="modal">
+                                <Button variant="ghost" className="text-white hover:text-white hover:bg-white/10">
+                                    Sign In
+                                </Button>
+                            </SignInButton>
+                            <SignUpButton mode="modal">
+                                <Button asChild className="bg-white text-black hover:bg-white/90">
+                                    <Link href="https://wa.me/252636444494" target="_blank">
+                                        Get Started
+                                    </Link>
+                                </Button>
+                            </SignUpButton>
+                        </SignedOut>
+                        <SignedIn>
+                            <UserButton
+                                appearance={{
+                                    elements: {
+                                        avatarBox: "w-9 h-9 border border-white/20"
+                                    }
+                                }}
+                            />
+                        </SignedIn>
+                    </div>
                 </div>
 
                 {/* Mobile Toggle */}
@@ -91,11 +108,27 @@ export function Navbar() {
                                 {link.name}
                             </Link>
                         ))}
-                        <Button asChild className="w-full rounded-full" onClick={() => setMobileMenuOpen(false)}>
-                            <Link href="#contact">
-                                Get Started
-                            </Link>
-                        </Button>
+                        <div className="flex flex-col gap-3 mt-4">
+                            <SignedOut>
+                                <SignInButton mode="modal">
+                                    <Button variant="outline" className="w-full" onClick={() => setMobileMenuOpen(false)}>
+                                        Sign In
+                                    </Button>
+                                </SignInButton>
+                                <SignUpButton mode="modal">
+                                    <Button asChild className="w-full" onClick={() => setMobileMenuOpen(false)}>
+                                        <Link href="https://wa.me/252636444494" target="_blank">
+                                            Get Started
+                                        </Link>
+                                    </Button>
+                                </SignUpButton>
+                            </SignedOut>
+                            <SignedIn>
+                                <div className="flex justify-center py-2">
+                                    <UserButton showName />
+                                </div>
+                            </SignedIn>
+                        </div>
                     </motion.div>
                 )}
             </AnimatePresence>

@@ -3,26 +3,40 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Loader2, CheckCircle2 } from "lucide-react"
 
+import { useMutation } from "convex/react"
+import { api } from "@/convex/_generated/api"
+
 export function Contact() {
     const [isLoading, setIsLoading] = useState(false)
     const [isSuccess, setIsSuccess] = useState(false)
+    const createContact = useMutation(api.contacts.createContact)
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         setIsLoading(true)
 
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 2000))
+        const formData = new FormData(e.target as HTMLFormElement)
+        const name = formData.get("name") as string
+        const company = formData.get("company") as string
+        const email = formData.get("email") as string
+        const message = formData.get("message") as string
 
-        setIsLoading(false)
-        setIsSuccess(true)
-
-        // Reset success message after 5 seconds
-        setTimeout(() => setIsSuccess(false), 5000)
-
-        // Reset form
-        const form = e.target as HTMLFormElement;
-        form.reset();
+        try {
+            await createContact({
+                name,
+                email,
+                message: `Company: ${company}\nMessage: ${message}`
+            })
+            setIsSuccess(true)
+            // Reset form
+            const form = e.target as HTMLFormElement;
+            form.reset();
+        } catch (error) {
+            console.error("Failed to submit contact form:", error)
+        } finally {
+            setIsLoading(false)
+            setTimeout(() => setIsSuccess(false), 5000)
+        }
     }
 
     return (

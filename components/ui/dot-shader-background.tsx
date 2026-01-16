@@ -1,7 +1,7 @@
 'use client'
 
 import { useMemo, useEffect, useRef } from 'react'
-import { Canvas, threeTypes, useFrame, useThree } from '@react-three/fiber'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { shaderMaterial, useTrailTexture } from '@react-three/drei'
 import { useTheme } from 'next-themes'
 import * as THREE from 'three'

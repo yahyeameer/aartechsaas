@@ -62,7 +62,7 @@ export function Hero() {
                         className="flex flex-col sm:flex-row items-center justify-center gap-4"
                     >
                         <LiquidButton size="xl" asChild className="text-white hover:text-white">
-                            <Link href="#contact">
+                            <Link href="https://wa.me/252636444494" target="_blank" rel="noopener noreferrer">
                                 Get Started <ArrowRight className="ml-2 h-4 w-4" />
                             </Link>
                         </LiquidButton>
