@@ -3,9 +3,9 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ProjectCard, Project } from "@/components/work/ProjectCard"
 import { cn } from "@/lib/utils"
-// import { SpotlightCard } from "@/components/ui/SpotlightCard"; // Unused? Or used in ProjectCard
 import { useQuery } from "convex/react"
 import { api } from "@/convex/_generated/api"
+import type { Doc } from "@/convex/_generated/dataModel"
 
 const filters = ["All", "Mobile Apps", "Management Systems", "E-commerce", "Design & Marketing"]
 
@@ -14,7 +14,7 @@ export function Work() {
     const convexProjects = useQuery(api.projects.get)
 
     // Map Convex data to Project interface
-    const projects: Project[] = convexProjects ? convexProjects.map((p: any) => ({
+    const projects: Project[] = convexProjects ? convexProjects.map((p: Doc<"projects">) => ({
         id: p._id,
         title: p.title,
         category: p.category,

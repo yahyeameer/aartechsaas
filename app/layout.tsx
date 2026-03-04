@@ -13,8 +13,29 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-heading" });
 
 export const metadata: Metadata = {
-  title: "NOON Digital | Digitalize Your Business",
+  title: {
+    default: "NOON Digital | Digitalize Your Business",
+    template: "%s | NOON Digital",
+  },
   description: "iOS & Android apps, ERP systems, hospital & school management, e-commerce, graphic design, and digital marketing — all digitalized by NOON Digital.",
+  keywords: ["digital agency", "app development", "ERP", "hospital management", "school management", "e-commerce", "graphic design", "digital marketing", "NOON Digital"],
+  openGraph: {
+    title: "NOON Digital | Digitalize Your Business",
+    description: "Full-service digital agency — apps, ERP, hospital & school systems, e-commerce, design & marketing.",
+    url: "https://noondigital.com",
+    siteName: "NOON Digital",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "NOON Digital | Digitalize Your Business",
+    description: "Full-service digital agency — apps, ERP, hospital & school systems, e-commerce, design & marketing.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -26,7 +47,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" className="dark" suppressHydrationWarning>
         <body className={cn(inter.variable, outfit.variable, "font-sans min-h-screen bg-[#050508] text-foreground antialiased selection:bg-primary/30 selection:text-white")}>
-          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+          <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark" disableTransitionOnChange>
             <ConvexClientProvider>
               <Navbar />
               <main className="min-h-screen">

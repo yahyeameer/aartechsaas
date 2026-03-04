@@ -19,6 +19,11 @@ export const create = mutation({
         walkthroughUrl: v.optional(v.string()),
     },
     handler: async (ctx, args) => {
+        const identity = await ctx.auth.getUserIdentity();
+        if (!identity) {
+            throw new Error("Unauthenticated. Please sign in.");
+        }
+
         await ctx.db.insert("projects", {
             ...args,
             createdAt: Date.now(),
@@ -29,6 +34,11 @@ export const create = mutation({
 export const remove = mutation({
     args: { id: v.id("projects") },
     handler: async (ctx, args) => {
+        const identity = await ctx.auth.getUserIdentity();
+        if (!identity) {
+            throw new Error("Unauthenticated. Please sign in.");
+        }
+
         await ctx.db.delete(args.id);
     },
 });

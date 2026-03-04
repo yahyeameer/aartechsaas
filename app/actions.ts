@@ -2,12 +2,6 @@
 
 import { GoogleGenerativeAI } from "@google/generative-ai"
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "")
-
-const model = genAI.getGenerativeModel({
-    model: "gemini-1.5-flash",
-    systemInstruction: "You are a friendly and expert marketing assistant for NOON Digital, a full-service digital transformation agency. Our services include: iOS & Android App Development, ERP Systems, Hospital Management Systems, School Management Systems, Business Solutions, Warehouse Management, E-commerce, Graphic Design, and Digital Marketing. Your goal is to explain our services and convert visitors into leads by encouraging them to contact us on WhatsApp at +25263644494. Keep responses concise (under 3 sentences), professional, and persuasive. Use a helpful tone.",
-})
 
 export type Message = {
     role: "user" | "model"
@@ -17,7 +11,6 @@ export type Message = {
 export async function chatWithGemini(history: Message[], newMessage: string) {
     try {
         const apiKey = process.env.GEMINI_API_KEY;
-        console.log("Checking API Key:", apiKey ? "Present" : "Missing");
 
         if (!apiKey) {
             throw new Error("GEMINI_API_KEY is not set in environment variables.");

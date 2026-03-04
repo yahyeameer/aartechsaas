@@ -14,16 +14,15 @@ const footerLinks = {
         { name: "Digital Marketing", href: "#services" },
     ],
     Company: [
-        { name: "About", href: "#about" },
+        { name: "Services", href: "#services" },
         { name: "Work", href: "#work" },
         { name: "Contact", href: "#contact" },
-        { name: "Privacy Policy", href: "#" },
     ],
     Socials: [
         { name: "WhatsApp", href: "https://wa.me/25263644494", icon: MessageCircle },
-        { name: "Twitter", href: "#", icon: Twitter },
-        { name: "LinkedIn", href: "#", icon: Linkedin },
-        { name: "Instagram", href: "#", icon: Instagram },
+        { name: "Twitter", href: "https://x.com/noondigital", icon: Twitter },
+        { name: "LinkedIn", href: "https://linkedin.com/company/noondigital", icon: Linkedin },
+        { name: "Instagram", href: "https://instagram.com/noondigital", icon: Instagram },
     ]
 }
 

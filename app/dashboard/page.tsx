@@ -4,12 +4,14 @@ import { useUser } from "@clerk/nextjs"
 import { useQuery, useMutation } from "convex/react"
 import { api } from "@/convex/_generated/api"
 import { useState } from "react"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Loader2, Trash2, Plus } from "lucide-react"
+import Link from "next/link"
 
 export default function DashboardPage() {
     const { user, isLoaded } = useUser()
@@ -44,6 +46,20 @@ export default function DashboardPage() {
 
     if (!user) {
         return <div className="flex h-screen items-center justify-center bg-black text-white">Access Denied. Please Sign In.</div>
+    }
+
+    const isAdmin = user.publicMetadata?.role === "admin";
+
+    if (!isAdmin) {
+        return (
+            <div className="flex h-screen flex-col items-center justify-center bg-black text-white space-y-4">
+                <h1 className="text-2xl font-bold">Access Denied</h1>
+                <p className="text-neutral-400">You do not have permission to view this page.</p>
+                <Button asChild variant="outline">
+                    <Link href="/">Return to Home</Link>
+                </Button>
+            </div>
+        );
     }
 
     return (
@@ -117,7 +133,7 @@ export default function DashboardPage() {
                                 projects.map(project => (
                                     <Card key={project._id} className="bg-neutral-900/50 border-white/10 text-white overflow-hidden group">
                                         <div className="h-40 overflow-hidden relative">
-                                            <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                                            <Image src={project.image} alt={project.title} width={400} height={160} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" unoptimized />
                                             <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-4">
                                                 <p className="text-xs text-center">{project.description}</p>
                                             </div>
