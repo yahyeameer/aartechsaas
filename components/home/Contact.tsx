@@ -46,13 +46,13 @@ export function Contact() {
             <div className="absolute bottom-0 left-0 w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-purple-900/10 blur-[100px] md:blur-[120px] rounded-full pointer-events-none" />
 
             <div className="container mx-auto px-4 sm:px-6 relative z-10">
-                <div className="max-w-4xl mx-auto rounded-2xl sm:rounded-3xl bg-white/5 border border-white/10 p-6 sm:p-8 md:p-12 backdrop-blur-md relative overflow-hidden">
+                <div className="max-w-4xl mx-auto rounded-[2rem] glass-panel p-6 sm:p-8 md:p-12 relative overflow-hidden shadow-2xl">
                     <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 relative z-10">
                         <div className="text-center md:text-left flex flex-col items-center md:items-start">
-                            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Ready to Digitalize?</h2>
-                            <p className="text-muted-foreground text-sm sm:text-base mb-8">
+                            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-white mb-4 tracking-tight">Ready to Digitalize?</h2>
+                            <p className="text-white/60 text-sm sm:text-base mb-8 leading-relaxed">
                                 Let&apos;s bring your business online. Chat with us on WhatsApp or fill out the form to get started.
                             </p>
 
@@ -88,20 +88,20 @@ export function Contact() {
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div className="space-y-2">
                                     <label htmlFor="name" className="text-sm font-medium text-white/80">Name</label>
-                                    <input required type="text" id="name" name="name" className="w-full h-11 rounded-lg bg-black/40 border border-white/10 px-4 text-white focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all placeholder:text-white/20" placeholder="Your name" />
+                                    <input required type="text" id="name" name="name" className="w-full h-12 rounded-xl bg-white/5 border border-white/10 px-4 text-white focus:outline-none focus:bg-white/10 focus:border-white/20 transition-all duration-300 placeholder:text-white/30" placeholder="Your name" />
                                 </div>
                                 <div className="space-y-2">
                                     <label htmlFor="company" className="text-sm font-medium text-white/80">Business</label>
-                                    <input required type="text" id="company" name="company" className="w-full h-11 rounded-lg bg-black/40 border border-white/10 px-4 text-white focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all placeholder:text-white/20" placeholder="Your business" />
+                                    <input required type="text" id="company" name="company" className="w-full h-12 rounded-xl bg-white/5 border border-white/10 px-4 text-white focus:outline-none focus:bg-white/10 focus:border-white/20 transition-all duration-300 placeholder:text-white/30" placeholder="Your business" />
                                 </div>
                             </div>
                             <div className="space-y-2">
                                 <label htmlFor="email" className="text-sm font-medium text-white/80">Email</label>
-                                <input required type="email" id="email" name="email" className="w-full h-11 rounded-lg bg-black/40 border border-white/10 px-4 text-white focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all placeholder:text-white/20" placeholder="your@email.com" />
+                                <input required type="email" id="email" name="email" className="w-full h-12 rounded-xl bg-white/5 border border-white/10 px-4 text-white focus:outline-none focus:bg-white/10 focus:border-white/20 transition-all duration-300 placeholder:text-white/30" placeholder="your@email.com" />
                             </div>
                             <div className="space-y-2">
                                 <label htmlFor="message" className="text-sm font-medium text-white/80">Tell us about your project</label>
-                                <textarea required id="message" name="message" rows={4} className="w-full rounded-lg bg-black/40 border border-white/10 p-4 text-white focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all placeholder:text-white/20 resize-none" placeholder="I need an app for my business..."></textarea>
+                                <textarea required id="message" name="message" rows={4} className="w-full rounded-xl bg-white/5 border border-white/10 p-4 text-white focus:outline-none focus:bg-white/10 focus:border-white/20 transition-all duration-300 placeholder:text-white/30 resize-none" placeholder="I need an app for my business..."></textarea>
                             </div>
 
                             <Button disabled={isLoading} size="lg" className="w-full text-base h-12 rounded-xl">

@@ -51,7 +51,7 @@ export function Hero() {
                         transition={{ duration: 0.6, delay: 0.1 }}
                         className="w-full"
                     >
-                        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] text-white">
+                        <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] text-white">
                             Digitalize{" "}
                             <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-violet-400 to-blue-400">
                                 Everything
@@ -79,13 +79,13 @@ export function Hero() {
                         initial={{ opacity: 0, y: 16 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.3 }}
-                        className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full px-2"
+                        className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full px-2"
                     >
                         <Link
                             href="https://wa.me/25263644494"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center justify-center gap-2 w-full sm:w-auto h-14 px-8 rounded-full bg-white text-black text-base font-semibold hover:bg-white/90 active:scale-95 transition-all duration-200 shadow-lg shadow-white/10"
+                            className="inline-flex items-center justify-center gap-2 w-full sm:w-auto h-14 px-8 rounded-full bg-white text-black text-base font-semibold hover:bg-white/90 active:scale-95 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.25)]"
                         >
                             <MessageCircle className="h-4 w-4 flex-shrink-0" />
                             Chat on WhatsApp
@@ -94,7 +94,7 @@ export function Hero() {
 
                         <Link
                             href="#work"
-                            className="inline-flex items-center justify-center gap-2 w-full sm:w-auto h-14 px-8 rounded-full bg-transparent border border-white/15 text-white text-base font-medium hover:bg-white/5 hover:border-white/25 active:scale-95 transition-all duration-200"
+                            className="glass-panel inline-flex items-center justify-center gap-2 w-full sm:w-auto h-14 px-8 rounded-full text-white text-base font-medium active:scale-95 transition-all duration-300"
                         >
                             <Play className="h-4 w-4 fill-white flex-shrink-0" />
                             View Our Work

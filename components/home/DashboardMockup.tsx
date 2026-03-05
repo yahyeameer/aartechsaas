@@ -1,6 +1,7 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useMotionValue, useTransform, useSpring, useScroll } from "framer-motion"
+import { useRef } from "react"
 import {
     Activity,
     BarChart3,
@@ -14,9 +15,52 @@ import {
 import { cn } from "@/lib/utils"
 
 export function DashboardMockup() {
+    const containerRef = useRef<HTMLDivElement>(null)
+
+    // Magnetic 3D Hover
+    const x = useMotionValue(0)
+    const y = useMotionValue(0)
+    const mouseXSpring = useSpring(x, { stiffness: 300, damping: 30 })
+    const mouseYSpring = useSpring(y, { stiffness: 300, damping: 30 })
+    const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["3deg", "-3deg"])
+    const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-3deg", "3deg"])
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!containerRef.current) return
+        const rect = containerRef.current.getBoundingClientRect()
+        const mouseX = e.clientX - rect.left
+        const mouseY = e.clientY - rect.top
+        const xPct = mouseX / rect.width - 0.5
+        const yPct = mouseY / rect.height - 0.5
+        x.set(xPct)
+        y.set(yPct)
+    }
+
+    const handleMouseLeave = () => {
+        x.set(0)
+        y.set(0)
+    }
+
+    // Scroll-driven scale down
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start end", "end start"]
+    })
+    const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 0.85])
+    const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0])
+
     return (
-        <div className="w-full aspect-video md:aspect-[16/9] max-w-6xl mx-auto p-2 md:p-4">
-            <div className="relative w-full h-full rounded-2xl bg-[#0A0A0A]/60 backdrop-blur-2xl border border-white/10 shadow-2xl overflow-hidden ring-1 ring-white/5">
+        <motion.div
+            ref={containerRef}
+            style={{ scale, opacity, perspective: "2000px" }}
+            className="w-full aspect-video md:aspect-[16/9] max-w-6xl mx-auto p-2 md:p-4 perspective-[2000px]"
+        >
+            <motion.div
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+                style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+                className="relative w-full h-full rounded-2xl sm:rounded-3xl bg-[#0A0A0A]/60 backdrop-blur-2xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden ring-1 ring-white/5 transition-shadow hover:shadow-[0_30px_60px_rgba(109,40,217,0.2)]"
+            >
 
                 {/* Window Controls */}
                 <div className="absolute top-0 left-0 right-0 h-12 border-b border-white/5 bg-white/5 flex items-center px-6 justify-between z-20">
@@ -166,7 +210,7 @@ export function DashboardMockup() {
                         <span className="text-[10px] text-white/40 uppercase tracking-wider group-hover:text-white transition-colors">Export</span>
                     </motion.button>
                 </div>
-            </div>
-        </div>
+            </motion.div>
+        </motion.div>
     )
 }

@@ -1,5 +1,7 @@
 "use client"
 
+import { useEffect, useState } from "react"
+
 /**
  * AuroraBackground — lightweight, GPU-friendly animated gradient background.
  * Replaces the heavy Three.js CDN-loaded ShaderAnimation for smoother performance
@@ -7,6 +9,16 @@
  */
 
 export function AuroraBackground({ className = "" }: { className?: string }) {
+    const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+
+    useEffect(() => {
+        const handleMouseMove = (e: MouseEvent) => {
+            setMousePos({ x: e.clientX, y: e.clientY })
+        }
+        window.addEventListener("mousemove", handleMouseMove)
+        return () => window.removeEventListener("mousemove", handleMouseMove)
+    }, [])
+
     return (
         <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}>
             {/* Base radial glow */}
@@ -55,9 +67,18 @@ export function AuroraBackground({ className = "" }: { className?: string }) {
                 }}
             />
 
+            {/* Interactive Cursor Glow */}
+            <div
+                className="absolute w-[400px] h-[400px] rounded-full blur-[120px] pointer-events-none transition-transform duration-1000 ease-out z-0 hidden md:block" // Hidden on mobile for performance
+                style={{
+                    background: "radial-gradient(circle, rgba(139,92,246,0.2) 0%, transparent 60%)",
+                    transform: `translate(${mousePos.x - 200}px, ${mousePos.y - 200}px)`,
+                }}
+            />
+
             {/* Subtle noise overlay for texture */}
             <div
-                className="absolute inset-0 opacity-[0.03]"
+                className="absolute inset-0 opacity-[0.03] mix-blend-overlay z-10"
                 style={{
                     backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
                     backgroundSize: "128px 128px",

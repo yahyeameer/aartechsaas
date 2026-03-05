@@ -105,31 +105,42 @@ export function Services() {
                 </div>
 
                 {/* Services Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                    {services.map((service, index) => (
-                        <motion.div
-                            key={service.title}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: index * 0.06 }}
-                            viewport={{ once: true }}
-                        >
-                            <SpotlightCard className="h-full p-6 sm:p-8 group hover:-translate-y-1 transition-all duration-500 hover:shadow-2xl hover:shadow-white/5">
-                                {/* Hover glow accent */}
-                                <div className={`absolute top-0 right-0 w-28 h-28 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-15 blur-2xl rounded-full transition-all duration-500 pointer-events-none`} />
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 auto-rows-[240px]">
+                    {services.map((service, index) => {
+                        let bentoClass = "md:col-span-1 md:row-span-1";
+                        if (index === 0) bentoClass = "md:col-span-2 md:row-span-2";
+                        else if (index === 3) bentoClass = "md:row-span-2";
+                        else if (index === 6) bentoClass = "md:col-span-2";
+                        else if (index === 8) bentoClass = "md:col-span-2";
 
-                                {/* Icon */}
-                                <div className="mb-5 inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white/5 border border-white/10 group-hover:scale-110 group-hover:bg-white/10 group-hover:border-white/20 transition-all duration-400">
-                                    <service.icon className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
-                                </div>
+                        return (
+                            <motion.div
+                                key={service.title}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5, delay: index * 0.05 }}
+                                viewport={{ once: true }}
+                                className={bentoClass}
+                            >
+                                <SpotlightCard className="h-full w-full p-6 sm:p-8 group hover:-translate-y-1 transition-all duration-500 hover:shadow-2xl hover:shadow-white/5 glass-panel flex flex-col items-start text-left overflow-hidden relative">
+                                    {/* Hover glow accent */}
+                                    <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-20 blur-3xl rounded-full transition-all duration-700 pointer-events-none`} />
 
-                                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 tracking-tight">{service.title}</h3>
-                                <p className="text-white/45 leading-relaxed text-sm">
-                                    {service.description}
-                                </p>
-                            </SpotlightCard>
-                        </motion.div>
-                    ))}
+                                    {/* Icon */}
+                                    <div className="mb-auto inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white/5 border border-white/10 group-hover:scale-110 group-hover:bg-white/10 group-hover:border-white/20 transition-all duration-300">
+                                        <service.icon className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+                                    </div>
+
+                                    <div className="mt-8 z-10 relative">
+                                        <h3 className="font-heading text-xl sm:text-2xl font-bold text-white mb-2 tracking-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white/70 transition-all duration-300">{service.title}</h3>
+                                        <p className="text-white/60 leading-relaxed text-sm sm:text-base font-medium">
+                                            {service.description}
+                                        </p>
+                                    </div>
+                                </SpotlightCard>
+                            </motion.div>
+                        );
+                    })}
                 </div>
             </div>
         </section>

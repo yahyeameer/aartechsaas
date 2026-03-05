@@ -38,7 +38,7 @@ export function Work() {
             <div className="container mx-auto px-4 sm:px-6 relative z-10">
                 <div className="flex flex-col gap-6 mb-12 sm:mb-16">
                     <div className="text-center sm:text-left max-w-xl">
-                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/50">
+                        <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/50">
                             Selected Work
                         </h2>
                         <p className="text-white/50 text-base sm:text-lg">
@@ -47,8 +47,8 @@ export function Work() {
                     </div>
 
                     {/* Filter Bar - horizontally scrollable on mobile */}
-                    <div className="w-full overflow-x-auto pb-1 -mx-1 px-1">
-                        <div className="flex items-center gap-2 p-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm w-max min-w-full sm:w-auto sm:min-w-0">
+                    <div className="w-full overflow-x-auto pb-2 -mx-1 px-1 hide-scrollbar">
+                        <div className="flex items-center gap-2 p-1.5 rounded-full glass-panel w-max min-w-full sm:w-auto sm:min-w-0">
                             {filters.map((filter) => (
                                 <button
                                     key={filter}

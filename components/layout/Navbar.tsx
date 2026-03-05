@@ -30,11 +30,13 @@ export function Navbar() {
     return (
         <header
             className={cn(
-                "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-                scrolled ? "bg-background/80 backdrop-blur-md border-b border-white/5 py-4" : "bg-transparent py-6"
+                "fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1)",
+                scrolled
+                    ? "top-4 w-[95%] max-w-5xl bg-black/40 backdrop-blur-xl border border-white/10 rounded-full py-3 shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
+                    : "top-0 w-full bg-transparent py-6 border-b border-transparent"
             )}
         >
-            <div className="container mx-auto px-4 flex items-center justify-between">
+            <div className="container mx-auto px-4 sm:px-6 flex items-center justify-between">
                 <Link href="/" className="flex items-center gap-2">
                     <div className="w-8 h-8 rounded-lg overflow-hidden">
                         <Image src="/icon.png" alt="NOON Digital" width={32} height={32} className="w-full h-full object-cover" />

@@ -20,11 +20,10 @@
   --destructive-foreground: #FFFFFF;
   --border: #27272A;
   --input: #27272A;
-  --ring: #6D28D9;
-  --radius: 0.75rem;
-
   /* Custom */
   --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-bg-hover: rgba(255, 255, 255, 0.08);
 }
 
 @theme inline {
@@ -50,7 +49,8 @@
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
 }
 
 html {
@@ -66,30 +66,74 @@ body {
 }
 
 .glass-panel {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--glass-border);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel:hover {
+  background: var(--glass-bg-hover);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 /* ─── Aurora Background Orb Animations ─────────────────────── */
 @keyframes aurora1 {
-  0%, 100% { transform: translateX(-50%) translateY(0px) scale(1); }
-  33%       { transform: translateX(-50%) translateY(-30px) scale(1.05); }
-  66%       { transform: translateX(-50%) translateY(20px) scale(0.97); }
-}
-@keyframes aurora2 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  40%       { transform: translate(-40px, -25px) scale(1.08); }
-  70%       { transform: translate(25px, 40px) scale(0.95); }
-}
-@keyframes aurora3 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50%       { transform: translate(30px, -35px) scale(1.1); }
+
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0px) scale(1);
+  }
+
+  33% {
+    transform: translateX(-50%) translateY(-30px) scale(1.05);
+  }
+
+  66% {
+    transform: translateX(-50%) translateY(20px) scale(0.97);
+  }
 }
 
-.aurora-orb-1 { animation: aurora1 14s ease-in-out infinite; }
-.aurora-orb-2 { animation: aurora2 18s ease-in-out infinite; }
-.aurora-orb-3 { animation: aurora3 22s ease-in-out infinite; }
+@keyframes aurora2 {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  40% {
+    transform: translate(-40px, -25px) scale(1.08);
+  }
+
+  70% {
+    transform: translate(25px, 40px) scale(0.95);
+  }
+}
+
+@keyframes aurora3 {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(30px, -35px) scale(1.1);
+  }
+}
+
+.aurora-orb-1 {
+  animation: aurora1 14s ease-in-out infinite;
+}
+
+.aurora-orb-2 {
+  animation: aurora2 18s ease-in-out infinite;
+}
+
+.aurora-orb-3 {
+  animation: aurora3 22s ease-in-out infinite;
+}
 
 /* ─── Floating WhatsApp Button ──────────────────────────────── */
 .whatsapp-float {
@@ -104,15 +148,17 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 24px rgba(37,211,102,0.45);
+  box-shadow: 0 4px 24px rgba(37, 211, 102, 0.45);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
   text-decoration: none;
 }
+
 .whatsapp-float:hover {
   transform: scale(1.1);
-  box-shadow: 0 6px 30px rgba(37,211,102,0.6);
+  box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
 }
+
 .whatsapp-float svg {
   width: 28px;
   height: 28px;
@@ -121,8 +167,14 @@ body {
 
 /* ─── Mobile Global Fixes ───────────────────────────────────── */
 @media (max-width: 640px) {
-  .container { padding-left: 1rem; padding-right: 1rem; }
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
 
 /* Prevent horizontal overflow on mobile */
-html, body { overflow-x: hidden; }
+html,
+body {
+  overflow-x: hidden;
+}
