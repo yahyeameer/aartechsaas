@@ -48,12 +48,13 @@ export function DashboardMockup() {
     })
     const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 0.85])
     const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0])
+    const unfoldRotateX = useTransform(scrollYProgress, [0, 0.35, 1], ["45deg", "0deg", "0deg"])
 
     return (
         <motion.div
             ref={containerRef}
-            style={{ scale, opacity, perspective: "2000px" }}
-            className="w-full aspect-video md:aspect-[16/9] max-w-6xl mx-auto p-2 md:p-4 perspective-[2000px]"
+            style={{ scale, opacity, rotateX: unfoldRotateX, perspective: "2000px" }}
+            className="w-full aspect-video md:aspect-[16/9] max-w-6xl mx-auto p-2 md:p-4 perspective-[2000px] z-20 relative"
         >
             <motion.div
                 onMouseMove={handleMouseMove}

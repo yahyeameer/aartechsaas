@@ -30,33 +30,41 @@ export function Work() {
     )
 
     return (
-        <section id="work" className="py-20 md:py-28 bg-[#050508] relative overflow-hidden">
-            {/* Background Ambience */}
-            <div className="absolute top-0 right-0 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-indigo-900/8 blur-[80px] md:blur-[120px] rounded-full pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-purple-900/8 blur-[80px] md:blur-[100px] rounded-full pointer-events-none" />
+        <section id="work" className="py-20 md:py-28 bg-transparent relative overflow-hidden">
+            {/* Background Ambience mapped to Nebula colors */}
+            <div className="absolute top-0 right-0 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-sky-900/10 blur-[80px] md:blur-[120px] rounded-full pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-emerald-900/10 blur-[80px] md:blur-[100px] rounded-full pointer-events-none" />
 
             <div className="container mx-auto px-4 sm:px-6 relative z-10">
                 <div className="flex flex-col gap-6 mb-12 sm:mb-16">
                     <div className="text-center sm:text-left max-w-xl">
-                        <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/50">
-                            Selected Work
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.03] border border-white/5 text-xs font-semibold tracking-widest uppercase text-white/50 mb-6 backdrop-blur-sm"
+                        >
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse flex-shrink-0" />
+                            Our Portfolio
+                        </motion.div>
+                        <h2 className="text-4xl sm:text-5xl md:text-6xl font-black mb-4 tracking-tighter text-white drop-shadow-lg">
+                            Selected <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-sky-500">Work</span>
                         </h2>
-                        <p className="text-white/50 text-base sm:text-lg">
-                            Explore our portfolio of high-impact digital solutions.
+                        <p className="text-white/50 text-base sm:text-lg font-medium">
+                            Explore our constellation of high-impact digital solutions.
                         </p>
                     </div>
 
-                    {/* Filter Bar - horizontally scrollable on mobile */}
                     <div className="w-full overflow-x-auto pb-2 -mx-1 px-1 hide-scrollbar">
-                        <div className="flex items-center gap-2 p-1.5 rounded-full glass-panel w-max min-w-full sm:w-auto sm:min-w-0">
+                        <div className="flex items-center gap-2 p-1.5 rounded-full bg-white/[0.02] border border-white/5 w-max min-w-full sm:w-auto sm:min-w-0 backdrop-blur-md">
                             {filters.map((filter) => (
                                 <button
                                     key={filter}
                                     onClick={() => setActiveFilter(filter)}
                                     className={cn(
-                                        "px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 whitespace-nowrap flex-shrink-0",
+                                        "px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 whitespace-nowrap flex-shrink-0",
                                         activeFilter === filter
-                                            ? "bg-white text-black shadow-lg shadow-white/10"
+                                            ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)] scale-105"
                                             : "text-white/50 hover:text-white hover:bg-white/5"
                                     )}
                                 >

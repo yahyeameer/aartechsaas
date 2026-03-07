@@ -13,12 +13,12 @@ export function TrustedMarquee() {
     ];
 
     return (
-        <div className="w-full py-12 overflow-hidden bg-transparent relative z-10 flex flex-col items-center border-y border-white/5">
-            <p className="text-white/40 text-sm font-medium tracking-widest uppercase mb-8">Trusted by visionary companies</p>
+        <div className="w-full py-16 overflow-hidden bg-transparent relative z-10 flex flex-col items-center border-y border-white/[0.05]">
+            <p className="text-white/40 text-xs sm:text-sm font-semibold tracking-widest uppercase mb-10">Trusted by visionary companies</p>
 
             {/* Fade gradients for edges */}
-            <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#050508] to-transparent z-10 pointer-events-none" />
-            <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#050508] to-transparent z-10 pointer-events-none" />
+            <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#050508]/60 to-transparent z-10 pointer-events-none" />
+            <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#050508]/60 to-transparent z-10 pointer-events-none" />
 
             <div className="flex whitespace-nowrap overflow-hidden">
                 <div className="flex animate-[marquee_40s_linear_infinite] gap-16 md:gap-32 items-center px-8 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
